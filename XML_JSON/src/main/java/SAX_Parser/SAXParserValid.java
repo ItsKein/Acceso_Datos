@@ -14,7 +14,7 @@ import javax.xml.parsers.SAXParserFactory;
 import javax.xml.parsers.SAXParser;
 import javax.xml.validation.SchemaFactory;
 
-class GestorEventos extends DefaultHandler {
+class GestorEventos2 extends DefaultHandler {
 
     private static final String INDENT_NIVEL = "  ";  // Para indentación
     private final PrintStream ps;
@@ -26,7 +26,7 @@ class GestorEventos extends DefaultHandler {
         }
     }
 
-    public GestorEventos(PrintStream ps) {
+    public GestorEventos2(PrintStream ps) {
         this.ps = ps;
     }
 

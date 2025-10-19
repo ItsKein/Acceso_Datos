@@ -2,7 +2,7 @@ package JSON;
 
 import java.util.List;
 
-public class VideoJuego {
+ class VideoJuego {
     private String titulo;
     private int anioLanzamiento;
     private String desarrollador;
@@ -39,5 +39,4 @@ public class VideoJuego {
                 '}';
     }
 }
-
 

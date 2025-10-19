@@ -1,6 +1,9 @@
 package Tema1.Excepciones;
 
-import java.io.*;
+import java.io.InputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * Clase que permite realizar un volcado binario (en formato hexadecimal) de un fichero.
@@ -13,16 +16,12 @@ public class VolcadoBinario {
     // Referencia al stream de entrada de datos, puede ser de cualquier tipo que herede de InputStream.
     InputStream is=null;
 
-    PrintStream out = null;
-
     /**
      * Constructor de la clase.
      * @param is El InputStream desde el que se leerán los datos.
      */
-    public VolcadoBinario(InputStream is, PrintStream out) {
-
+    public VolcadoBinario(InputStream is) {
         this.is=is;
-        this.out = out;
     }
 
     /**
@@ -41,16 +40,16 @@ public class VolcadoBinario {
             // Lee hasta 'TAM_FILA' bytes del stream y los almacena en el buffer.
             bytesLeidos=is.read(buffer);
             // Imprime el offset actual formateado a 5 dígitos.
-            out.format("[%5d] ", offset);
+            System.out.format("[%5d] ", offset);
             // Itera sobre los bytes leídos en el buffer.
             for(int i=0; i<bytesLeidos; i++) {
                 // Formatea y imprime cada byte en su representación hexadecimal de dos dígitos.
-                out.format("%2x", buffer[i]);
+                System.out.format("%2x", buffer[i]);
             }
             // Incrementa el offset con el número de bytes que se acaban de leer.
             offset+=bytesLeidos;
             // Salto de línea para la siguiente fila del volcado.
-            out.println();
+            System.out.println();
         } while (bytesLeidos==TAM_FILA && offset<MAX_BYTES); // Continúa el bucle mientras se lean 'TAM_FILA' bytes y no se haya superado el límite 'MAX_BYTES'.
     }
 
@@ -60,25 +59,22 @@ public class VolcadoBinario {
      */
     public static void main(String[] args) {
         // Comprueba si se ha pasado al menos un argumento al programa.
-        if(args.length<2) {
+        if(args.length<1) {
             System.out.println("No se ha indicado ningún fichero");
             return;
         }
         // Asigna el primer argumento a la variable 'nomFich'.
-        String nomFichEntrada=args[0];
-        String nomFichSalida = args[1];
-
+        String nomFich=args[0];
         // Usa un 'try-with-resources' para asegurar que el 'FileInputStream' se cierra automáticamente.
-        try (FileInputStream fis = new FileInputStream(nomFichEntrada);
-            PrintStream ps = new PrintStream(new FileOutputStream(nomFichSalida))) {
+        try (FileInputStream fis = new FileInputStream(nomFich)) {
             // Crea una instancia de 'VolcadoBinario' pasando el 'FileInputStream'.
-            VolcadoBinario vb = new VolcadoBinario(fis, ps);
+            VolcadoBinario vb = new VolcadoBinario(fis);
             // Llama al método 'volcar' para realizar el volcado del fichero.
             vb.volcar();
         }
         // Captura la excepción si el fichero no se encuentra.
         catch (FileNotFoundException e) {
-            System.err.println("ERROR: no existe fichero "+ nomFichEntrada);
+            System.err.println("ERROR: no existe fichero "+nomFich);
         }
         // Captura la excepción si ocurre un error general de entrada/salida.
         catch (IOException e) {
