@@ -35,14 +35,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FicheroAccesoAleatorio {
+public class FicheroAccesoAleatorio2 {
 
     private File f;
     private List<Pair<String, Integer>> campos;
     private long longReg;
     private long numReg = 0;
 
-    FicheroAccesoAleatorio(String nomFich, List<Pair<String, Integer>> campos)
+    FicheroAccesoAleatorio2(String nomFich, List<Pair<String, Integer>> campos)
             throws IOException {
         this.campos = campos;
         this.f = new File(nomFich);
@@ -128,7 +128,7 @@ public class FicheroAccesoAleatorio {
         campos.add(new Pair<>("CP", 5));
 
         try {
-            FicheroAccesoAleatorio faa = new FicheroAccesoAleatorio("fic_acceso_aleat.dat", campos);
+            FicheroAccesoAleatorio2 faa = new FicheroAccesoAleatorio2("fic_acceso_aleat.dat", campos);
 
             Map<String, String> reg = new HashMap<>();
             reg.put("DNI", "56789012B");
