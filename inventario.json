@@ -1,0 +1,19 @@
+{
+  "nombreTienda" : "TechStore Valencia",
+  "productos" : [ {
+    "id" : "P001",
+    "nombre" : "Portátil HP",
+    "precio" : 799.99,
+    "cantidad" : 10
+  }, {
+    "id" : "P002",
+    "nombre" : "Ratón Logitech",
+    "precio" : 25.5,
+    "cantidad" : 50
+  }, {
+    "id" : "P003",
+    "nombre" : "Teclado Mecánico",
+    "precio" : 89.9,
+    "cantidad" : 20
+  } ]
+}

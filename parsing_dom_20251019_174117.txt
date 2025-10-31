@@ -1,0 +1,16 @@
+Documento DOM, versión: 1.0, codificación: UTF-8
+  <clientes>
+    <cliente @DNI[78901234X]>
+      <apellidos>
+        #text[NADALES]
+      <CP>
+        #text[44126]
+    <cliente @DNI[89012345E]>
+      <apellidos>
+        #text[ROJAS]
+      <validez @estado[borrado] @timestamp[1528286082]>
+    <cliente @DNI[56789012B]>
+      <apellidos>
+        #text[SAMPER]
+      <CP>
+        #text[29730]

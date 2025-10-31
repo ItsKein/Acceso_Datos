@@ -131,6 +131,34 @@ public class Dao {
         }
     }
 
+    public void sincronizarCliente (Connection connection, List<String[]> datosFinales) throws SQLException {
+
+        try (PreparedStatement pstmDelete = connection.prepareStatement("DELETE FROM CLIENTES");
+             PreparedStatement pstmInsert = connection.prepareStatement("INSERT INTO CLIENTES (DNI, APELLIDOS, CP) VALUES (?, ?, ?)");) {
+
+            int filasEliminadas = pstmDelete.executeUpdate();
+            System.out.println("Se ha eliminado " + filasEliminadas + " registros obsoletos");
+
+            for (String[] cliente : datosFinales) {
+                String dni = cliente[0];
+                String apellidos = cliente[1];
+                String cP = cliente[2];
+
+                System.out.println("Procesando cliente: " + dni);
+
+                pstmInsert.setString(1, dni);
+                pstmInsert.setString(2, apellidos);
+                if (cP == null) {
+                    pstmInsert.setNull(3, Types.VARCHAR);
+                } else {
+                    pstmInsert.setString(3,cP);
+                }
+                pstmInsert.executeUpdate();
+
+            }
+        }
+    }
+
     /**
      * Inserta clientes de forma más eficiente usando procesamiento por lotes (batch).
      * Esto reduce drásticamente la comunicación con la base de datos.
